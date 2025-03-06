@@ -21,17 +21,19 @@ RUN useradd -m pptruser \
     && chown -R pptruser:pptruser /home/pptruser
 
 COPY package*.json ./
-
-USER pptruser
 RUN bun install
 
-COPY --chown=pptruser:pptruser . .
+COPY . .
 RUN bun run build
 
-COPY --chown=pptruser:pptruser docker-entrypoint.sh /usr/src/app/docker-entrypoint.sh
+RUN chown -R pptruser:pptruser /usr/src/app
+
+COPY docker-entrypoint.sh /usr/src/app/docker-entrypoint.sh
 RUN chmod +x /usr/src/app/docker-entrypoint.sh
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD bun run healthcheck.js
+
+USER pptruser
 
 CMD ["/usr/src/app/docker-entrypoint.sh"]
