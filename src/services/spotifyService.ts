@@ -29,7 +29,7 @@ function openBrowser(url: string): void {
   });
 }
 
-const TOKEN_PATH = path.join(process.cwd(), "spotify_tokens.json");
+const TOKEN_PATH = path.join(process.cwd(), "data", "spotify_tokens.json");
 
 export class SpotifyService {
   private spotifyApi: SpotifyWebApi;
@@ -202,19 +202,14 @@ export class SpotifyService {
     };
 
     try {
-      if (fs.existsSync(TOKEN_PATH)) {
-        const stats = fs.statSync(TOKEN_PATH);
-        if (stats.isDirectory()) {
-          console.error(`Error: ${TOKEN_PATH} is a directory. Please delete it and try again.`);
-          throw new Error(`${TOKEN_PATH} is a directory, not a file.`);
-        } else {
-          fs.unlinkSync(TOKEN_PATH);
-        }
-      }
+      // Don't try to delete the file, just write to it
       fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokenData, null, 2));
+      console.log("Tokens saved successfully");
     } catch (error) {
       console.error("Failed to save tokens:", error);
-      throw error;
+      console.error(
+        "Will continue without saving tokens. Authentication may be required on next startup."
+      );
     }
   }
 

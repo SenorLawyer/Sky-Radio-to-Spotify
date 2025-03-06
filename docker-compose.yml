@@ -8,7 +8,7 @@ services:
     environment:
       SKIP_BROWSER: "true"
     volumes:
-      - ./data/spotify_tokens.json:/usr/src/app/spotify_tokens.json
+      - ./data:/usr/src/app/data
     healthcheck:
       test: ["CMD", "bun", "run", "healthcheck.js"]
       interval: 30s
