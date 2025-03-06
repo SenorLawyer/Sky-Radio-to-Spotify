@@ -21,7 +21,6 @@ RUN bun install
 
 COPY . .
 RUN bun run build
-RUN touch spotify_tokens.json
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD bun run healthcheck.js
