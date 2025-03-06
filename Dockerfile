@@ -16,6 +16,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     CHROME_BIN=/usr/bin/google-chrome \
     CHROME_PATH=/usr/bin/google-chrome
 
+RUN touch spotify_tokens.json
 COPY package*.json ./
 RUN bun install
 

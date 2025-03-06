@@ -5,6 +5,8 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      SKIP_BROWSER: "true"
     volumes:
       - ./spotify_tokens.json:/usr/src/app/spotify_tokens.json
     healthcheck:

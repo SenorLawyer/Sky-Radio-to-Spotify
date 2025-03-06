@@ -7,6 +7,13 @@ import url from "url";
 import { exec } from "child_process";
 
 function openBrowser(url: string): void {
+  if (process.env.NODE_ENV === "production" || process.env.SKIP_BROWSER === "true") {
+    console.log(
+      `Running in production or SKIP_BROWSER is set. Please open this URL manually:\n${url}`
+    );
+    return;
+  }
+
   const command =
     process.platform === "win32"
       ? `start "${url}"`
