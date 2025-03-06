@@ -7,6 +7,4 @@ fi
 chown pptruser:pptruser /usr/src/app/spotify_tokens.json
 chmod 666 /usr/src/app/spotify_tokens.json
 
-chown -R pptruser:pptruser /usr/src/app
-
 exec bun run start
