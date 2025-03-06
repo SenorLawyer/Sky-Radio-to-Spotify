@@ -1,0 +1,25 @@
+{
+  "name": "spotifyradio",
+  "version": "1.0.0",
+  "description": "App that tracks Sky Radio songs and adds them to a Spotify playlist",
+  "main": "dist/index.js",
+  "scripts": {
+    "start:dev": "bun run src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0",
+    "puppeteer": "^24.3.1",
+    "spotify-web-api-node": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.4",
+    "@types/node": "^20.10.0",
+    "@types/puppeteer": "^7.0.4",
+    "@types/spotify-web-api-node": "^5.0.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
+}

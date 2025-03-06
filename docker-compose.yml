@@ -1,0 +1,29 @@
+services:
+  skyradio-spotify:
+    build: .
+    container_name: skyradio-spotify
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./spotify_tokens.json:/usr/src/app/spotify_tokens.json
+    healthcheck:
+      test: ["CMD", "bun", "run", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /usr/src/app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    # For the first run, you'll need to authenticate with Spotify
+    # So remove the 'detach' flag for the first run
+    # After authentication, you can restart with detach
+    ports:
+      - "8888:8888"  # Uncomment this for the first run to allow authentication
