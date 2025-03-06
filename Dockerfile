@@ -16,12 +16,12 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     CHROME_BIN=/usr/bin/google-chrome \
     CHROME_PATH=/usr/bin/google-chrome
 
-RUN touch spotify_tokens.json
 COPY package*.json ./
 RUN bun install
 
 COPY . .
 RUN bun run build
+RUN touch spotify_tokens.json
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD bun run healthcheck.js
