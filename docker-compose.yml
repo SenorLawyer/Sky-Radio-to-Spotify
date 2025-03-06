@@ -26,4 +26,4 @@ services:
     # So remove the 'detach' flag for the first run
     # After authentication, you can restart with detach
     ports:
-      - "8888:8888"  # Uncomment this for the first run to allow authentication
+      - "8888:8888" # Uncomment this for the first run to allow authentication

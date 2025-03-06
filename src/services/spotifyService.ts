@@ -135,7 +135,7 @@ export class SpotifyService {
               res.end("<h1>Not found</h1>");
             }
           } catch (error) {
-            console.error("Error in callback authentication: ", error)
+            console.error("Error in callback authentication: ", error);
             res.writeHead(500, { "Content-Type": "text/html" });
             res.end(
               "<h1>Authentication error!</h1><p>An error occurred during authentication.</p>"

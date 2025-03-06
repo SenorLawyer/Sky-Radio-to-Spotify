@@ -29,9 +29,12 @@ COPY . .
 
 RUN bun run build
 
+COPY docker-entrypoint.sh /usr/src/app/docker-entrypoint.sh
+RUN chmod +x /usr/src/app/docker-entrypoint.sh
+
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD bun run healthcheck.js
 
 USER pptruser
 
-CMD ["bun", "run", "start"]
+CMD ["/usr/src/app/docker-entrypoint.sh"]
