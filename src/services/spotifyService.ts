@@ -202,17 +202,15 @@ export class SpotifyService {
     };
 
     try {
-      if (!fs.existsSync(TOKEN_PATH)) {
-        fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokenData, null, 2));
-      } else {
+      if (fs.existsSync(TOKEN_PATH)) {
         const stats = fs.statSync(TOKEN_PATH);
         if (stats.isDirectory()) {
-          throw new Error(
-            `${TOKEN_PATH} is a directory, not a file. Please delete it and try again.`
-          );
+          fs.rmdirSync(TOKEN_PATH, { recursive: true });
+        } else {
+          fs.unlinkSync(TOKEN_PATH);
         }
-        fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokenData, null, 2));
       }
+      fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokenData, null, 2));
     } catch (error) {
       console.error("Failed to save tokens:", error);
       throw error;
