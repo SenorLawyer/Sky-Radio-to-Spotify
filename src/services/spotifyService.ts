@@ -205,7 +205,8 @@ export class SpotifyService {
       if (fs.existsSync(TOKEN_PATH)) {
         const stats = fs.statSync(TOKEN_PATH);
         if (stats.isDirectory()) {
-          fs.rmdirSync(TOKEN_PATH, { recursive: true });
+          console.error(`Error: ${TOKEN_PATH} is a directory. Please delete it and try again.`);
+          throw new Error(`${TOKEN_PATH} is a directory, not a file.`);
         } else {
           fs.unlinkSync(TOKEN_PATH);
         }
